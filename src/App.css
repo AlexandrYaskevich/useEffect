@@ -1,0 +1,22 @@
+#root {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 2rem;
+    text-align: center;
+  }
+  
+.conteiner{
+    height: 90%;
+    width: 90%;
+  }
+.btn-group-vertical {
+    height: 30px;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.details-container {
+    left: 0px;
+}
