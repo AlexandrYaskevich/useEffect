@@ -17,7 +17,7 @@ export const List = () => {
     return () => {
       ac.abort();
     };
-    }, []);
+    }, [])  // eslint-disable-line react-hooks/exhaustive-deps
 
 console.log(users);
 
