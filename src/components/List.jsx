@@ -6,7 +6,7 @@ import UsersContext from "../context/UsersContext";
 
 
 export const List = () => {
-  const { users, setUsers, id, setId } = useContext(UsersContext);
+  const { users, setUsers, setId } = useContext(UsersContext);
  
   useEffect(() => {
     const ac = new AbortController();
