@@ -1,19 +1,23 @@
-
-import { List } from './components/List';
-import { Detalis } from './components/Details';
-import './App.css'
+import "./App.css";
+import { Detalis } from "./components/Details";
+import { List } from "./components/List";
+import UsersProvider from "./context/UsersProvider";
 
 function App() {
-  
-
   return (
-    <>
-    <div className='conteiner'>
-     <List /> 
-     <Detalis />
-     </div>
-    </>
-  )
+    <UsersProvider>
+      <div className="container">
+        <div className="row d-flex justify-content-center">
+          <div className="col-3 col-sm-3 col-md-2">
+            <List />
+          </div>
+          <div className="col-5 col-sm-4 col-md-3">
+            <Detalis />
+          </div>
+        </div>
+      </div>
+    </UsersProvider>
+  );
 }
 
-export default App
+export default App;

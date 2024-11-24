@@ -1,37 +1,42 @@
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useContext } from "react";
+import UsersContext from "../context/UsersContext";
+
 
 
 
 export const List = () => {
-    const [users, setUsers] = useState([]);
-    const [selectedUserId, setSelectedUserId] = useState(null);
+  const { users, setUsers, id, setId } = useContext(UsersContext);
+ 
   useEffect(() => {
-    fetch('https://raw.githubusercontent.com/netology-code/ra16-homeworks/master/hooks-context/use-effect/data/users.json')
-        .then((response) => response.json())
-        .then((data) => setUsers(data));
+    const ac = new AbortController();
+    fetch('https://raw.githubusercontent.com/netology-code/ra16-homeworks/master/hooks-context/use-effect/data/users.json', { signal: ac.signal })
+    .then((response) => response.json())
+    .then((data) => setUsers(data));
 
+    return () => {
+      ac.abort();
+    };
     }, []);
-    const handleSelectUser = (user) => {
-        setSelectedUserId(user.id);
-      };
 
-  return <div>
-  <div className="btn-group-vertical">
-    {users.map((o) => {
-      return (
-        <button
-          key={o.id}
-          type="button"
-          
-          onClick={() => handleSelectUser(o)}
-          className={selectedUserId === o.id ? 'selected-user' : ''}
-        >
-          {o.name}
-        </button>
-      );
-    })}
-  </div>
-</div>
+console.log(users);
+
+  return (
+    <div>
+      <div className="btn-group-vertical">
+        {users.map((o) => {
+          return (
+            <button
+              key={o.id}
+              type="button"
+             
+              onClick={() => setId(o.id)}
+            >
+              {o.name}
+            </button>
+          );
+        })}
+      </div>
+    </div>
+  );
 };
-
