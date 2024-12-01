@@ -13,7 +13,7 @@ export const List = () => {
     fetch('https://raw.githubusercontent.com/netology-code/ra16-homeworks/master/hooks-context/use-effect/data/users.json', { signal: ac.signal })
     .then((response) => response.json())
     .then((data) => setUsers(data));
-
+    
     return () => {
       ac.abort();
     };

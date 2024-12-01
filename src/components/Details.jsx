@@ -7,16 +7,20 @@ export function Detalis () {
   const { id } = useContext(UsersContext);
   
   useEffect(() => {
+    const ac = new AbortController();
     if (id) {
       setLoading(true);
-      fetch(`https://raw.githubusercontent.com/netology-code/ra16-homeworks/master/hooks-context/use-effect/data/${id}.json`)
+      fetch(`https://raw.githubusercontent.com/netology-code/ra16-homeworks/master/hooks-context/use-effect/data/${id}.json`, { signal: ac.signal })
         .then((response) => response.json())
         .then((data) => {
           setUserDetails(data);
           setLoading(false);
+          
         });
     }
-
+    return () => {
+      ac.abort();
+    };
   }, [id]);  
 
 
@@ -28,7 +32,7 @@ return (    <div className='details-container'>
 
 {id && (
   <>
-    <img src={userDetails?.avatar} alt="User Avatar" />
+  {id == userDetails?.id && <img src={userDetails?.avatar} alt="User Avatar" id={id}/>} 
     <p className='details-userName'>{userDetails?.name}</p>
     <p>City: {userDetails?.details.city}</p>
     <p>Company: {userDetails?.details.company}</p>
